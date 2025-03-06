@@ -1,5 +1,3 @@
-# Create Life - AI Project Architecture
-
 ## Overview
 "Create Life" describes the architecture and step-by-step instructions to build your self-evolving, self-improving AI. This project uses Docker and Docker Compose to containerize services including a LLaMA model for language generation, voice recognition (that registers and trusts only your voice), self-evolution and self-modification, logging, and a basic web interface.
 
