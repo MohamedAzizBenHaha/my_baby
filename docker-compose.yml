@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  llama:
+    build:
+      context: ./llama
+      dockerfile: Dockerfile
+    volumes:
+      - ./llama/model_weights:/model_weights
+      - ./data:/data
+    ports:
+      - "5000:5000"
+
+  voice_recognition:
+    build:
+      context: ./voice_recognition
+      dockerfile: Dockerfile
+    volumes:
+      - ./data/voice_data:/voice_data
+    ports:
+      - "5001:5001"
+
+  self_evolution:
+    build:
+      context: ./self_evolution
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/data
+    depends_on:
+      - llama
+      - voice_recognition
+    ports:
+      - "5002:5002"
+
+  logging:
+    build:
+      context: ./logging
+      dockerfile: Dockerfile
+    volumes:
+      - ./data/logs:/logs
+    ports:
+      - "5003:5003"
+
+  web_interface:
+    build:
+      context: ./web_interface
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/data
+    ports:
+      - "80:80"
